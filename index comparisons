@@ -1,0 +1,35 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.set_style('whitegrid') # controls the color of background
+plt.style.use("fivethrityeight") #interchangable visual appearance
+%matplotlib inline #output is displayed in jupyter notebook
+
+from pandas_datareader.data import DataReader
+from datetime import datetime
+
+etf_list = ['VOO', 'ARKK', 'ARKG', 'BRK.B']
+end = datetime.now()
+start = datetime(end.year - 1, end.month, end.day)
+
+for stock in etf_list:
+globals()[stock] = DataReader(stock, 'yahoo', start, end)
+
+index_list = [VOO, ARKK, ARKG, BRK.B]
+index_name = ['SPY', 'INNOVATION', 'GENOMICS', 'VALUE']
+
+for etf, etf_name in zip(index_list, index_name):
+  etf['index_name'] = etf_name
+
+df = pd.concat(index_list, axis = 0)
+df.tail(10) # last 10 lines
+
+VOO.describe() # summary of stats
+VOO.info # general info
+
+plt.figure(figsize = (5,3))
+plt.subplots_adjust (top=1.25, bottom=1.2)
+
+for i in enumerate(index_list, 1)
